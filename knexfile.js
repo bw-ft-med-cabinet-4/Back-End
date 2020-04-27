@@ -1,5 +1,3 @@
-// Update with your config settings.
-
 module.exports = {
 
   development: {
@@ -16,16 +14,18 @@ module.exports = {
     },
   },
 
-  staging: {
-    client: 'postgresql',
+  testing: {
+    client: 'sqlite3',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
+      filename: './data/test-db.db3'
     },
+    useNullAsDefault: true,
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: "./data/migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
   },
 
   production: {
