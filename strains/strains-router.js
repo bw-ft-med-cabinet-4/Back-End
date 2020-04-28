@@ -3,10 +3,8 @@ const router = require('express').Router()
 const db = require('./strains-model')
 
 router.get('/strains', (req, res) => {
-    console.log(req.decodedToken)
     db.getStrains()
         .then(strains => {
-            console.log(strains)
             res.status(200).json(strains)
         })
         .catch(err => {
@@ -16,6 +14,7 @@ router.get('/strains', (req, res) => {
 
 router.get('/strains/:id', (req, res) => {
     db.getStrainById(req.params.id)
+        .first()
         .then(strain => {
             res.status(200).json(strain)
         })
@@ -48,12 +47,11 @@ router.get('/saved/:id', (req, res) => {
     }
 })
 
-router.post('/saved', (req, res) => {
-    console.log(req.decodedToken)
+router.post('/strains/:id', (req, res) => {
     if (req.body) {
 
         req.body.user_id = req.decodedToken.userId
-        req.body.id = null
+        req.body.strain_id = req.params.id
 
         db.saveStrain(req.body)
             .then(strain => {

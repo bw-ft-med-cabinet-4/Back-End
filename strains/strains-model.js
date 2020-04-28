@@ -21,8 +21,10 @@ function getStrainById(id) {
 
 function getSaved(id) {
     return db('users')
-        .select('saved.strain', 'saved.effect', 'saved.medical_effect', 'saved.flavor', 'saved.type', 'saved.thc', 'saved.cbd', 'saved.description', 'saved.score', 'saved.reccomendation')
+        .select('saved.id', 'strains.strain', 'strains.effect', 'strains.medical_effect', 'strains.flavor', 'strains.type', 'strains.thc', 'strains.cbd', 'strains.description')
         .join('saved', 'users.id', 'saved.user_id')
+        .join('strains', 'strains.id', 'saved.strain_id')
+        .where('users.id', id)
 }
 
 async function saveStrain(body) {
