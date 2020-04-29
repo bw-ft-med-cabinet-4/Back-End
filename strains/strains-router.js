@@ -53,6 +53,9 @@ router.post('/strains/:id', (req, res) => {
         req.body.user_id = req.decodedToken.userId
         req.body.strain_id = req.params.id
 
+        console.log('strain', req.body.strain_id)
+        console.log('user', req.decodedToken.userId)
+
         db.saveStrain(req.body)
             .then(strain => {
                 res.status(201).json(strain)
