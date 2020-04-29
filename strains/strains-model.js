@@ -49,5 +49,7 @@ function removeSaved(id) {
 
 function findSavedById(id) {
     return db('saved')
-        .where({ id })
+        .select('saved.id', 'strains.strain', 'strains.effect', 'strains.medical_effect', 'strains.flavor', 'strains.type', 'strains.thc', 'strains.cbd', 'strains.description')
+        .join('strains', 'strains.id', 'saved.strain_id')
+        .where('saved.id', id)
 }
