@@ -6,7 +6,7 @@ const db = require('../data/db-config')
 describe('strains router works', () => {
     let token
     beforeAll(done => {
-        request(server)
+        return request(server)
             .post('/api/login')
             .send({ username: 'User', password: 'pass' })
             .end((err, Response) => {
@@ -66,12 +66,24 @@ describe('strains router works', () => {
 
     describe('get /saved', () => {
         it('correctly gets a users saved strains', () => {
-            request(server)
+            return request(server)
                 .get('/api/saved')
                 .set('Authorization', `${token}`)
                 .then(res => {
                     expect(res.status).toBe(200)
                     expect(res.body).toHaveLength(1)
+                })
+        })
+    })
+
+    describe('get /saved/:id', () => {
+        it('gets the correct strain', () => {
+            return request(server)
+                .get('/api/saved/1')
+                .set('Authorization', `${token}`)
+                .then(res => {
+                    expect(res.status).toBe(200)
+                    expect(res.body).toBeTruthy()
                 })
         })
     })

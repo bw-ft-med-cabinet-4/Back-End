@@ -36,6 +36,7 @@ router.get('/saved', (req, res) => {
 router.get('/saved/:id', (req, res) => {
     if (req.params.id) {
         db.findSavedById(req.params.id)
+            .first()
             .then(strain => {
                 res.status(200).json(strain)
             })
