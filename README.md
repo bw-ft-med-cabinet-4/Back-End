@@ -38,6 +38,9 @@ https://medcabinetbackend.herokuapp.com/
 
 
 ## Strains
-| GET      | /api/saved       | will get the users saved strain          |
-| POST     | /api/strains/:id | will save specific strain id to the user |
-| DELETE   | /api/saved/:id   | will delete users saved strain           |
+| GET      | /api/strains     | will get the strains                            |
+| GET      | /api/strains/:id | will get the strain at the specified id         |
+| GET      | /api/saved       | will get all the users saved strain             |
+| GET      | /api/saved/:id   | will get the users saved strain at specified id |
+| POST     | /api/strains/:id | will save specific strain id to the user        |
+| DELETE   | /api/saved/:id   | will delete users saved strain                  |
